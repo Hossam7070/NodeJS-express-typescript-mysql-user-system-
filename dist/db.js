@@ -26,7 +26,7 @@ const tablePlot = () => __awaiter(void 0, void 0, void 0, function* () {
     try {
         yield exports.connection.query(userTable);
         yield exports.connection.query(produsctTable);
-        console.log("tablePlot");
+        console.log(" user and product tables on database productDb");
     }
     catch (err) {
         console.log(err);

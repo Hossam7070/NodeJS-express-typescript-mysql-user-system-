@@ -3,6 +3,7 @@ import { Request , Response ,NextFunction} from 'express';
 import {connection ,tablePlot } from './db'
 import userRoutes from './routes/user'
 import productsRoutes from './routes/products'
+import * as dotenv from "dotenv";
 class App {
     private app: Application;
 
@@ -46,6 +47,7 @@ async function start() {
     const app = new App(3000);
     await app.listen();
     tablePlot();
+    dotenv.config();
 }
 
 start();

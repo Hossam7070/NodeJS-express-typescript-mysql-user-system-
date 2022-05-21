@@ -16,7 +16,7 @@ export const tablePlot = async () => {
     try {
         await connection.query(userTable);
         await connection.query(produsctTable);
-        console.log("tablePlot");
+        console.log(" user and product tables on database productDb");
     } catch (err) {
         console.log(err);
     }

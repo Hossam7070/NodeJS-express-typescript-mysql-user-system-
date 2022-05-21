@@ -30,7 +30,7 @@ const login = (req, res, next) => __awaiter(void 0, void 0, void 0, function* ()
         // console.log(user[0][0]['id'])
         const token = yield asyncTokenSign({
             id: user[0][0]['id']
-        }, "MY-SUPER-SECRET-KEY");
+        }, process.env.SECRET_KEY);
         res.send({
             token
         });
@@ -43,7 +43,7 @@ exports.login = login;
 const protect = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     const { authorization } = req.headers;
     try {
-        const payload = yield asyncTokenVerification(authorization, "MY-SUPER-SECRET-KEY");
+        const payload = yield asyncTokenVerification(authorization, process.env.SECRET_KEY);
         const [userId] = yield db_1.connection.query(`select id from user where id = ${payload.id}`);
         req.user = userId[0].id;
         console.log(req.user);

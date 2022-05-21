@@ -17,7 +17,7 @@ export const login:RequestHandler = async (req,res,next) => {
             // console.log(user[0][0]['id'])
         const token = await asyncTokenSign({
             id: user[0][0]['id']
-        },"MY-SUPER-SECRET-KEY")
+        },process.env.SECRET_KEY)
         res.send({
             token
         });
@@ -31,7 +31,7 @@ export const protect:RequestHandler = async(req,res,next)=>{
     const { authorization } = req.headers;
     
     try {
-        const payload:any = await asyncTokenVerification(authorization, "MY-SUPER-SECRET-KEY");
+        const payload:any = await asyncTokenVerification(authorization, process.env.SECRET_KEY);
         const [userId]:Array<any> = await connection.query(`select id from user where id = ${payload.id}`) 
         req.user = userId[0].id;
         console.log(req.user);
